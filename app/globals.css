@@ -1,6 +1,10 @@
 @import "tailwindcss";
+ 
 
 :root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 20, 20, 30;
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -20,7 +24,34 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+}
+
+.skill-scroll {
+  flex-shrink: 0;
+}
+
+.skill-scroll-container:hover .animate-scroll {
+  animation-play-state: paused;
 }
