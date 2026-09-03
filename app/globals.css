@@ -1,57 +1,214 @@
-@import "tailwindcss";
- 
+@import "tailwindcss" source(none);
+@source "./**/*.{ts,tsx}";
+@source "../components/**/*.{ts,tsx}";
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 20, 20, 30;
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFDF5;
+  --foreground: #1E293B;
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
+  --accent: #8B5CF6;
+  --accent-foreground: #FFFFFF;
+  --secondary: #F472B6;
+  --secondary-foreground: #FFFFFF;
+  --tertiary: #FBBF24;
+  --tertiary-foreground: #1E293B;
+  --quaternary: #34D399;
+  --quaternary-foreground: #1E293B;
+  --border: #E2E8F0;
+  --border-ink: #1E293B;
+  --input: #FFFFFF;
+  --card: #FFFFFF;
+  --ring: #8B5CF6;
+  --shadow-ink: #1E293B;
+  --dot-color: rgba(30, 41, 59, 0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: #14121F;
+  --foreground: #F1F0F7;
+  --muted: #201D33;
+  --muted-foreground: #9B97B8;
+  --accent: #A78BFA;
+  --accent-foreground: #14121F;
+  --secondary: #FB7DBB;
+  --secondary-foreground: #14121F;
+  --tertiary: #FCD34D;
+  --tertiary-foreground: #14121F;
+  --quaternary: #4ADE80;
+  --quaternary-foreground: #14121F;
+  --border: #322D4C;
+  --border-ink: #000000;
+  --input: #1E1B2E;
+  --card: #1C1930;
+  --ring: #A78BFA;
+  --shadow-ink: #000000;
+  --dot-color: rgba(241, 240, 247, 0.07);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jakarta), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
 }
 
-@keyframes scroll {
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+}
+
+/* Background Patterns */
+.bg-dot-grid {
+  background-image: radial-gradient(var(--dot-color) 1.75px, transparent 1.75px);
+  background-size: 24px 24px;
+}
+
+/* Tactile Hard Shadows */
+.shadow-pop {
+  box-shadow: 4px 4px 0px 0px var(--shadow-ink);
+}
+
+.shadow-pop-sm {
+  box-shadow: 2px 2px 0px 0px var(--shadow-ink);
+}
+
+.shadow-pop-lg {
+  box-shadow: 8px 8px 0px 0px var(--shadow-ink);
+}
+
+.shadow-pop-accent {
+  box-shadow: 4px 4px 0px 0px var(--accent);
+}
+
+.shadow-pop-secondary {
+  box-shadow: 4px 4px 0px 0px var(--secondary);
+}
+
+.shadow-pop-tertiary {
+  box-shadow: 4px 4px 0px 0px var(--tertiary);
+}
+
+.shadow-pop-quaternary {
+  box-shadow: 4px 4px 0px 0px var(--quaternary);
+}
+
+/* Custom Bouncy Transitions */
+.transition-bounce {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-duration: 300ms;
+}
+
+/* Candy Button interactive states */
+.candy-btn {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  border: 2px solid var(--foreground);
+  box-shadow: 4px 4px 0px 0px var(--shadow-ink);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.candy-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--shadow-ink);
+}
+
+.candy-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px var(--shadow-ink);
+}
+
+/* Secondary Button interactive states */
+.secondary-btn {
+  background-color: transparent;
+  color: var(--foreground);
+  border: 2px solid var(--foreground);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.secondary-btn:hover {
+  background-color: var(--tertiary);
+  color: var(--tertiary-foreground);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px 0px var(--shadow-ink);
+}
+
+.secondary-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px var(--shadow-ink);
+}
+
+/* Sticker Card Hover Animation */
+.sticker-card {
+  background-color: var(--card);
+  border: 2px solid var(--foreground);
+  box-shadow: 8px 8px 0px 0px var(--shadow-ink);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sticker-card:hover {
+  transform: rotate(-1deg) scale(1.02);
+}
+
+/* Infinite Marquee Scroll */
+@keyframes scrollLeft {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
-.animate-scroll {
-  animation: scroll 25s linear infinite;
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: scrollLeft 28s linear infinite;
 }
 
-.skill-scroll {
-  flex-shrink: 0;
-}
-
-.skill-scroll-container:hover .animate-scroll {
+.animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* Floating Shapes Animation */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(6deg);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* Respect user's reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
