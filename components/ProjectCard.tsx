@@ -8,103 +8,81 @@ export interface Project {
   name: string;
   description: string;
   url?: string;
-  image?: string;
   github?: string;
   technologies: string[];
   featured?: boolean;
   highlights?: string[];
-  colorType?: 'accent' | 'secondary' | 'tertiary' | 'quaternary';
+  badge?: string;
 }
 
 interface ProjectCardProps {
   project: Project;
   index: number;
+  inCarousel?: boolean;
 }
 
-const colorThemes = [
-  {
-    badgeBg: 'bg-[var(--accent)]',
-    badgeText: 'text-[var(--accent-foreground)]',
-    tagBg: 'bg-[var(--accent)]/15 text-[var(--accent)] border-[var(--accent)]',
-    glowShadow: 'shadow-pop-accent',
-  },
-  {
-    badgeBg: 'bg-[var(--secondary)]',
-    badgeText: 'text-[var(--secondary-foreground)]',
-    tagBg: 'bg-[var(--secondary)]/15 text-[var(--secondary)] border-[var(--secondary)]',
-    glowShadow: 'shadow-pop-secondary',
-  },
-  {
-    badgeBg: 'bg-[var(--tertiary)]',
-    badgeText: 'text-[var(--tertiary-foreground)]',
-    tagBg: 'bg-[var(--tertiary)]/15 text-[var(--tertiary-foreground)] border-[var(--tertiary)]',
-    glowShadow: 'shadow-pop-tertiary',
-  },
-  {
-    badgeBg: 'bg-[var(--quaternary)]',
-    badgeText: 'text-[var(--quaternary-foreground)]',
-    tagBg: 'bg-[var(--quaternary)]/15 text-[var(--quaternary-foreground)] border-[var(--quaternary)]',
-    glowShadow: 'shadow-pop-quaternary',
-  },
-];
-
-export default function ProjectCard({ project, index }: ProjectCardProps) {
-  const theme = colorThemes[index % colorThemes.length];
-
+export default function ProjectCard({
+  project,
+  index,
+  inCarousel = false,
+}: ProjectCardProps) {
   return (
-    <div
-      className={`group relative rounded-2xl border-2 border-[var(--foreground)] bg-[var(--card)] p-6 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.02] hover:-rotate-1 flex flex-col justify-between ${
-        project.featured 
-          ? 'shadow-[8px_8px_0px_0px_var(--shadow-ink)] dark:shadow-[8px_8px_0px_0px_var(--accent)] border-2 ring-2 ring-[var(--accent)]/30' 
-          : 'shadow-[8px_8px_0px_0px_var(--shadow-ink)]'
+    <article
+      className={`group relative flex flex-col justify-between transition-all duration-300 ${
+        inCarousel
+          ? 'snap-start shrink-0 w-[88vw] sm:w-[460px] bg-white border border-[#d5cfef] rounded-[16px] p-7 sm:p-8 shadow-[0_2px_25px_rgba(0,0,0,0.06)] hover:border-[#7c3aed] hover:shadow-[0_10px_30px_-10px_rgba(124,58,237,0.2)]'
+          : 'bg-[#f4f3fb] border border-[#d5cfef] rounded-[14px] p-7 sm:p-8 hover:bg-white hover:border-[#7c3aed] hover:shadow-[0_10px_30px_-10px_rgba(124,58,237,0.15)]'
       }`}
     >
-      {/* Floating half-in / half-out circle icon badge */}
-      <div
-        className={`absolute -top-5 left-6 w-11 h-11 rounded-full border-2 border-[var(--foreground)] ${theme.badgeBg} ${theme.badgeText} flex items-center justify-center font-heading font-extrabold text-base shadow-pop-sm group-hover:rotate-12 transition-transform duration-300 z-10`}
-      >
-        {project.featured ? (
-          <Star className="w-5 h-5 fill-current" />
-        ) : (
-          <span>{String(index + 1).padStart(2, '0')}</span>
-        )}
-      </div>
+      <div>
+        {/* Header: Project Index & Badge */}
+        <div className="flex items-center justify-between gap-2 border-b border-[#e6e0fe] pb-4 mb-4">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs font-bold text-[#7c3aed] bg-[#e6e0fe] px-2 py-0.5 rounded">
+              0{index + 1}
+            </span>
+            {project.badge && (
+              <span className="font-mono text-xs text-[#686082]">
+                {project.badge}
+              </span>
+            )}
+          </div>
 
-      {/* Featured Ribbon */}
-      {project.featured && (
-        <div className="absolute -top-3 right-6 px-3 py-0.5 rounded-full border-2 border-[var(--foreground)] bg-[var(--tertiary)] text-[var(--tertiary-foreground)] text-xs font-heading font-extrabold uppercase tracking-wider rotate-3 shadow-pop-sm select-none">
-          ★ Featured Project
+          {project.featured && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[#e6e0fe] text-[#7c3aed] border border-[#d4c4fd]">
+              <Star className="w-3 h-3 fill-[#7c3aed]" />
+              <span>Featured Project</span>
+            </span>
+          )}
         </div>
-      )}
 
-      {/* Card Header & Content */}
-      <div className="pt-2">
-        <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-[var(--foreground)] mt-2 mb-2 flex items-center gap-2">
+        {/* Project Title */}
+        <h3 className="font-grotesque font-bold text-xl sm:text-2xl text-[#000000] group-hover:text-[#7c3aed] transition-colors leading-snug mb-2.5">
           {project.name}
         </h3>
-        
-        <p className="text-[var(--muted-foreground)] text-sm sm:text-base leading-relaxed mb-4">
+
+        {/* Project Description */}
+        <p className="text-[#4a4568] text-sm leading-relaxed mb-4">
           {project.description}
         </p>
 
-        {/* Highlights / Feature points if provided */}
+        {/* Highlights */}
         {project.highlights && project.highlights.length > 0 && (
-          <ul className="space-y-1.5 mb-4 text-xs sm:text-sm text-[var(--foreground)]/90">
+          <div className="mb-5 space-y-1.5 border-l-2 border-[#d5cfef] pl-3 py-1">
             {project.highlights.map((point, idx) => (
-              <li key={idx} className="flex items-start gap-2">
-                <span className="text-[var(--accent)] font-bold text-xs mt-0.5">✦</span>
-                <span className="leading-snug">{point}</span>
-              </li>
+              <p key={idx} className="text-xs text-[#2e2e2e] leading-snug">
+                &bull; {point}
+              </p>
             ))}
-          </ul>
+          </div>
         )}
 
-        {/* Tech tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        {/* Technologies */}
+        <div className="flex flex-wrap gap-1.5 mb-6">
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 text-xs font-heading font-bold rounded-full border-2 border-[var(--border)] bg-[var(--muted)] text-[var(--foreground)] shadow-[2px_2px_0px_0px_var(--shadow-ink)]"
+              className="px-2.5 py-1 text-xs font-mono rounded bg-white border border-[#d5cfef] text-[#1a153a] group-hover:border-[#d4c4fd] transition-colors"
             >
               {tech}
             </span>
@@ -112,51 +90,38 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
       </div>
 
-      {/* Card Action Buttons */}
-      <div className="flex items-center gap-3 pt-4 border-t-2 border-[var(--border)] mt-auto">
-        {project.url ? (
-          <>
+      {/* Action Buttons: Live Demo & GitHub */}
+      <div className="pt-4 border-t border-[#e6e0fe] flex items-center justify-between gap-3 mt-auto">
+        <div className="flex flex-wrap items-center gap-2">
+          {project.url && (
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-[var(--accent)] text-[var(--accent-foreground)] border-2 border-[var(--foreground)] font-heading font-bold text-sm shadow-pop hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--shadow-ink)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_var(--shadow-ink)] transition-all duration-200"
+              className="btn-purple px-4 py-2 text-xs font-semibold gap-1.5"
             >
               <span>Live Demo</span>
-              <div className="w-5 h-5 rounded-full bg-[var(--card)] text-[var(--foreground)] flex items-center justify-center">
-                <ExternalLink className="w-3 h-3" strokeWidth={2.5} />
-              </div>
+              <ExternalLink className="w-3.5 h-3.5 stroke-[2.5]" />
             </a>
+          )}
 
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View ${project.name} source code on GitHub`}
-                className="flex items-center justify-center w-11 h-11 rounded-full border-2 border-[var(--foreground)] bg-[var(--card)] text-[var(--foreground)] shadow-pop hover:bg-[var(--tertiary)] hover:text-[var(--tertiary-foreground)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--shadow-ink)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_var(--shadow-ink)] transition-all duration-200"
-              >
-                <FaGithub className="w-5 h-5" />
-              </a>
-            )}
-          </>
-        ) : (
-          project.github && (
+          {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-[var(--accent)] text-[var(--accent-foreground)] border-2 border-[var(--foreground)] font-heading font-bold text-sm shadow-pop hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--shadow-ink)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_var(--shadow-ink)] transition-all duration-200"
+              className="btn-secondary-fly px-3.5 py-2 text-xs font-mono font-semibold gap-1.5"
             >
-              <FaGithub className="w-4 h-4" />
-              <span>View Repository & Architecture</span>
-              <div className="w-5 h-5 rounded-full bg-[var(--card)] text-[var(--foreground)] flex items-center justify-center ml-1">
-                <ExternalLink className="w-3 h-3" strokeWidth={2.5} />
-              </div>
+              <FaGithub className="w-3.5 h-3.5 text-[#7c3aed]" />
+              <span>Source Code</span>
             </a>
-          )
-        )}
+          )}
+        </div>
+
+        <span className="font-mono text-[11px] text-[#686082]">
+          {project.url ? 'Deployed' : 'Open Source'}
+        </span>
       </div>
-    </div>
+    </article>
   );
 }

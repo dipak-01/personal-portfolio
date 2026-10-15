@@ -1,39 +1,30 @@
 import type { Metadata, Viewport } from 'next';
-import { Outfit, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '../components/ThemeProvider';
-
-const outfit = Outfit({
-  subsets: ['latin'],
-  weight: ['600', '700', '800', '900'],
-  variable: '--font-outfit',
-  display: 'swap',
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-jakarta',
-  display: 'swap',
-});
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FFFDF5' },
-    { media: '(prefers-color-scheme: dark)', color: '#14121F' },
-  ],
+  themeColor: '#f4f6eb',
   width: 'device-width',
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  title: 'Dipak Kurkute | Web Developer & Frontend Engineer',
-  description: 'Personal portfolio of Dipak Kurkute. Crafting playful, fast, and responsive modern web experiences with React, Next.js, and TypeScript.',
-  keywords: ['Dipak Kurkute', 'Web Developer', 'Frontend Developer', 'React', 'Next.js', 'TypeScript', 'Portfolio'],
+  title: 'Dipak Kurkute | Full-Stack & Cloud-Native Systems Engineer',
+  description: 'Portfolio of Dipak Kurkute. Architectural web applications, zero-knowledge encryption platforms, and automated cloud infrastructure built with Next.js, TypeScript, and Kubernetes.',
+  keywords: [
+    'Dipak Kurkute',
+    'Full-Stack Developer',
+    'Frontend Engineer',
+    'DevOps',
+    'Kubernetes',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Portfolio'
+  ],
   authors: [{ name: 'Dipak Kurkute' }],
   openGraph: {
-    title: 'Dipak Kurkute | Web Developer',
-    description: 'Personal portfolio of Dipak Kurkute. Specializing in modern, responsive, and playful web applications.',
+    title: 'Dipak Kurkute | Full-Stack & Cloud-Native Systems Engineer',
+    description: 'Modernist web applications, zero-knowledge encryption platforms, and automated cloud infrastructure.',
     type: 'website',
   },
 };
@@ -44,36 +35,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${outfit.variable} ${plusJakartaSans.variable}`}
-    >
+    <html lang="en" className="scroll-smooth">
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const stored = localStorage.getItem('pgds-theme');
-                  const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (stored === 'dark' || (!stored && supportDarkMode)) {
-                    document.documentElement.classList.add('dark');
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                    document.documentElement.setAttribute('data-theme', 'light');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
         />
       </head>
-      <body className="antialiased min-h-screen selection:bg-[var(--tertiary)] selection:text-[var(--tertiary-foreground)]">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+      <body className="antialiased min-h-screen bg-white text-[#2e2e2e]">
+        {children}
       </body>
     </html>
   );
