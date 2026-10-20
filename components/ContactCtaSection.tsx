@@ -17,169 +17,102 @@ export default function ContactCtaSection() {
   };
 
   return (
-    <section id="contact" className="relative space-y-12">
-      
-      {/* Container Envelope with Ambient Glow Beam */}
-      <div className="relative rounded-[24px] overflow-hidden">
-        
-        {/* Soft rotating pastel luminescence ambient glow beam */}
-        <div
-          className="absolute -top-12 -left-12 -right-12 -bottom-12 luminescence-ambient-glow animate-ambient-glow pointer-events-none"
-          aria-hidden="true"
-        />
-
-        {/* Contact Surface Box */}
-        <div className="relative z-10 bg-white/95 backdrop-blur-md border border-[#d5cfef] rounded-[24px] p-8 sm:p-12 lg:p-16 shadow-[0_20px_50px_-20px_rgba(26,21,58,0.12)] overflow-hidden">
-          
-          {/* Subtle dot matrix overlay */}
-          <div
-            className="absolute inset-0 luminescence-dots pointer-events-none opacity-50"
-            aria-hidden="true"
-          />
-
-          <div className="relative z-10 max-w-3xl text-left space-y-6">
-            
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f4f3fb] border border-[#d5cfef] text-xs font-mono text-[#7c3aed]">
-              <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
-              <span>Available for Software Engineering Roles &amp; Freelance</span>
+    <section id="contact" className="py-12 sm:py-16 border-b border-zinc-200/80">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="bg-white border border-zinc-200/80 rounded-2xl p-8 sm:p-10 shadow-xs">
+          <div className="max-w-2xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 text-xs font-medium text-emerald-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span>Get in Touch</span>
             </div>
 
-            <h2 className="font-grotesque font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#000000] tracking-tight leading-tight">
-              Let&apos;s build something great together.
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+              Let&apos;s connect
             </h2>
 
-            <p className="font-serif italic text-base sm:text-lg text-[#686082] leading-relaxed max-w-2xl">
-              I&apos;m currently open to new opportunities. Whether you have a project in mind, an opportunity to discuss, or just want to connect, feel free to reach out!
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+              I am actively looking for full-time software engineering roles and internships.
+              Whether you have an opening, a technical question, or an interesting project, I would love to hear from you.
             </p>
 
-            {/* Direct Copy Prompt & Email Actions */}
-            <div className="pt-2 flex flex-wrap items-center justify-start gap-4">
-              {/* Interactive Copy Email Button */}
+            {/* Email Actions */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <a
+                href={`mailto:${email}`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold bg-zinc-900 text-white hover:bg-zinc-800 transition-colors shadow-xs"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Send Email</span>
+              </a>
+
               <button
                 type="button"
                 onClick={handleCopy}
-                className={`group relative inline-flex items-center gap-2.5 px-5 py-3.5 rounded-lg border text-sm font-mono font-medium transition-all duration-200 cursor-pointer select-none ${
-                  copied
-                    ? 'bg-[#ecfdf5] border-[#a7f3d0] text-[#059669]'
-                    : 'bg-[#f4f3fb] hover:bg-white border-[#d5cfef] hover:border-[#7c3aed] text-[#1a153a] shadow-xs'
-                }`}
-                aria-label="Copy email address"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100 transition-colors"
               >
-                <span className="relative w-4 h-4 flex items-center justify-center shrink-0">
-                  <Copy
-                    className={`w-4 h-4 text-[#7c3aed] absolute transition-all duration-200 ${
-                      copied ? 'scale-50 opacity-0' : 'scale-100 opacity-100 group-hover:scale-110'
-                    }`}
-                    strokeWidth={2}
-                  />
-                  <Check
-                    className={`w-4 h-4 text-[#059669] absolute transition-all duration-200 ${
-                      copied ? 'scale-100 opacity-100' : 'scale-50 opacity-0'
-                    }`}
-                    strokeWidth={2.5}
-                  />
-                </span>
-                <span>{copied ? 'Copied to clipboard!' : email}</span>
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 text-emerald-600" />
+                    <span className="text-emerald-700 font-medium">Copied {email}!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4 text-zinc-500" />
+                    <span>Copy: {email}</span>
+                  </>
+                )}
               </button>
-
-              {/* Direct Mailto Button */}
-              <a
-                href={`mailto:${email}`}
-                className="btn-purple px-6 py-3.5 text-sm font-semibold gap-2"
-              >
-                <Mail className="w-4 h-4 stroke-[2.5]" />
-                <span>Send Email</span>
-                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-              </a>
             </div>
-
           </div>
 
-          {/* Social Channels 3-Card Grid */}
-          <div className="relative z-10 mt-12 pt-8 border-t border-[#e6e0fe] grid grid-cols-1 md:grid-cols-3 gap-5">
-            
-            {/* Email Card */}
-            <div className="bg-[#f4f3fb] border border-[#d5cfef] rounded-[14px] p-6 flex flex-col justify-between hover:border-[#7c3aed] transition-colors">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-white border border-[#e6e0fe] flex items-center justify-center text-[#7c3aed] mb-4">
-                  <Mail className="w-5 h-5 stroke-[2]" />
+          {/* Social Profiles Grid */}
+          <div className="mt-8 pt-6 border-t border-zinc-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a
+              href="https://www.linkedin.com/in/dipak-kurkute-2a4451256/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 rounded-xl border border-zinc-200/70 hover:border-zinc-300 hover:bg-zinc-50/50 transition-colors group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-[#0a66c2]/10 text-[#0a66c2] flex items-center justify-center">
+                  <FaLinkedin className="w-4 h-4" />
                 </div>
-                <div className="font-grotesque font-bold text-base text-[#1a153a] mb-1">
-                  Email
-                </div>
-                <div className="font-mono text-xs text-[#686082] break-all">
-                  {email}
+                <div>
+                  <div className="text-sm font-bold text-zinc-900 group-hover:text-zinc-700">
+                    LinkedIn
+                  </div>
+                  <div className="text-xs text-zinc-500 font-mono">
+                    dipak-kurkute
+                  </div>
                 </div>
               </div>
-              <div className="pt-4 mt-4 border-t border-[#d5cfef]">
-                <a
-                  href={`mailto:${email}`}
-                  className="text-xs font-mono font-bold text-[#7c3aed] hover:underline flex items-center gap-1"
-                >
-                  <span>Write an email</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
+              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-zinc-700 transition-colors" />
+            </a>
 
-            {/* GitHub Card */}
-            <div className="bg-[#f4f3fb] border border-[#d5cfef] rounded-[14px] p-6 flex flex-col justify-between hover:border-[#7c3aed] transition-colors">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-white border border-[#e6e0fe] flex items-center justify-center text-[#1a153a] mb-4">
-                  <FaGithub className="w-5 h-5" />
+            <a
+              href="https://github.com/dipak-01"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 rounded-xl border border-zinc-200/70 hover:border-zinc-300 hover:bg-zinc-50/50 transition-colors group"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-zinc-100 text-zinc-800 flex items-center justify-center">
+                  <FaGithub className="w-4 h-4" />
                 </div>
-                <div className="font-grotesque font-bold text-base text-[#1a153a] mb-1">
-                  GitHub
-                </div>
-                <div className="font-mono text-xs text-[#686082]">
-                  Explore repositories &amp; code
-                </div>
-              </div>
-              <div className="pt-4 mt-4 border-t border-[#d5cfef]">
-                <a
-                  href="https://github.com/dipak-01"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-mono font-bold text-[#7c3aed] hover:underline flex items-center gap-1"
-                >
-                  <span>github.com/dipak-01</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-            {/* LinkedIn Card */}
-            <div className="bg-[#f4f3fb] border border-[#d5cfef] rounded-[14px] p-6 flex flex-col justify-between hover:border-[#7c3aed] transition-colors">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-white border border-[#e6e0fe] flex items-center justify-center text-[#0a66c2] mb-4">
-                  <FaLinkedin className="w-5 h-5" />
-                </div>
-                <div className="font-grotesque font-bold text-base text-[#1a153a] mb-1">
-                  LinkedIn
-                </div>
-                <div className="font-mono text-xs text-[#686082]">
-                  Professional profile &amp; network
+                <div>
+                  <div className="text-sm font-bold text-zinc-900 group-hover:text-zinc-700">
+                    GitHub
+                  </div>
+                  <div className="text-xs text-zinc-500 font-mono">
+                    github.com/dipak-01
+                  </div>
                 </div>
               </div>
-              <div className="pt-4 mt-4 border-t border-[#d5cfef]">
-                <a
-                  href="https://www.linkedin.com/in/dipak-kurkute-2a4451256/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-mono font-bold text-[#7c3aed] hover:underline flex items-center gap-1"
-                >
-                  <span>Connect with Dipak</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
+              <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-zinc-700 transition-colors" />
+            </a>
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }

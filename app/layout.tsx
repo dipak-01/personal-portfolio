@@ -2,29 +2,32 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const viewport: Viewport = {
-  themeColor: '#f4f6eb',
+  themeColor: '#ffffff',
   width: 'device-width',
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
-  title: 'Dipak Kurkute | Full-Stack & Cloud-Native Systems Engineer',
-  description: 'Portfolio of Dipak Kurkute. Architectural web applications, zero-knowledge encryption platforms, and automated cloud infrastructure built with Next.js, TypeScript, and Kubernetes.',
+  title: 'Dipak Kurkute | Full-Stack & Cloud Software Developer',
+  description:
+    'Portfolio of Dipak Kurkute. Full-Stack Developer & Cloud Systems Engineer specializing in Next.js, TypeScript, React, Kubernetes, and AWS infrastructure.',
   keywords: [
     'Dipak Kurkute',
+    'Software Developer',
     'Full-Stack Developer',
     'Frontend Engineer',
-    'DevOps',
+    'DevOps Engineer',
     'Kubernetes',
     'React',
     'Next.js',
     'TypeScript',
-    'Portfolio'
+    'Portfolio',
   ],
   authors: [{ name: 'Dipak Kurkute' }],
   openGraph: {
-    title: 'Dipak Kurkute | Full-Stack & Cloud-Native Systems Engineer',
-    description: 'Modernist web applications, zero-knowledge encryption platforms, and automated cloud infrastructure.',
+    title: 'Dipak Kurkute | Full-Stack & Cloud Software Developer',
+    description:
+      'Full-Stack Developer & Cloud Systems Engineer specializing in Next.js, TypeScript, React, Kubernetes, and AWS infrastructure.',
     type: 'website',
   },
 };
@@ -38,16 +41,21 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased min-h-screen bg-white text-[#2e2e2e]">
+      <body className="antialiased min-h-screen bg-[#fafafa] text-zinc-900 selection:bg-zinc-900 selection:text-white">
         {children}
       </body>
     </html>
   );
 }
+

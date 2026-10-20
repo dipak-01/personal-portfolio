@@ -17,72 +17,57 @@ export interface Project {
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
-  inCarousel?: boolean;
 }
 
-export default function ProjectCard({
-  project,
-  index,
-  inCarousel = false,
-}: ProjectCardProps) {
+export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article
-      className={`group relative flex flex-col justify-between transition-all duration-300 ${
-        inCarousel
-          ? 'snap-start shrink-0 w-[88vw] sm:w-[460px] bg-white border border-[#d5cfef] rounded-[16px] p-7 sm:p-8 shadow-[0_2px_25px_rgba(0,0,0,0.06)] hover:border-[#7c3aed] hover:shadow-[0_10px_30px_-10px_rgba(124,58,237,0.2)]'
-          : 'bg-[#f4f3fb] border border-[#d5cfef] rounded-[14px] p-7 sm:p-8 hover:bg-white hover:border-[#7c3aed] hover:shadow-[0_10px_30px_-10px_rgba(124,58,237,0.15)]'
-      }`}
-    >
+    <article className="flex flex-col justify-between bg-white border border-zinc-200/80 rounded-xl p-6 shadow-xs hover:border-zinc-300 hover:shadow-sm transition-all duration-200">
       <div>
-        {/* Header: Project Index & Badge */}
-        <div className="flex items-center justify-between gap-2 border-b border-[#e6e0fe] pb-4 mb-4">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold text-[#7c3aed] bg-[#e6e0fe] px-2 py-0.5 rounded">
-              0{index + 1}
+        {/* Header: Badge & Status */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          {project.badge ? (
+            <span className="text-xs font-mono font-medium px-2 py-0.5 rounded bg-zinc-100 text-zinc-600 border border-zinc-200/60">
+              {project.badge}
             </span>
-            {project.badge && (
-              <span className="font-mono text-xs text-[#686082]">
-                {project.badge}
-              </span>
-            )}
-          </div>
+          ) : (
+            <span />
+          )}
 
           {project.featured && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-[#e6e0fe] text-[#7c3aed] border border-[#d4c4fd]">
-              <Star className="w-3 h-3 fill-[#7c3aed]" />
-              <span>Featured Project</span>
+            <span className="inline-flex items-center gap-1 text-[11px] font-mono font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60">
+              <Star className="w-3 h-3 fill-emerald-600 text-emerald-600" />
+              <span>Featured</span>
             </span>
           )}
         </div>
 
-        {/* Project Title */}
-        <h3 className="font-grotesque font-bold text-xl sm:text-2xl text-[#000000] group-hover:text-[#7c3aed] transition-colors leading-snug mb-2.5">
+        {/* Title */}
+        <h3 className="text-lg font-bold text-zinc-900 mb-2 leading-snug">
           {project.name}
         </h3>
 
-        {/* Project Description */}
-        <p className="text-[#4a4568] text-sm leading-relaxed mb-4">
+        {/* Description */}
+        <p className="text-sm text-zinc-600 leading-relaxed mb-4">
           {project.description}
         </p>
 
-        {/* Highlights */}
+        {/* Key Highlights */}
         {project.highlights && project.highlights.length > 0 && (
-          <div className="mb-5 space-y-1.5 border-l-2 border-[#d5cfef] pl-3 py-1">
+          <ul className="mb-4 space-y-1.5 border-l-2 border-zinc-200 pl-3 py-0.5">
             {project.highlights.map((point, idx) => (
-              <p key={idx} className="text-xs text-[#2e2e2e] leading-snug">
+              <li key={idx} className="text-xs text-zinc-600 leading-relaxed">
                 &bull; {point}
-              </p>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
 
-        {/* Technologies */}
+        {/* Tech Stack Tags */}
         <div className="flex flex-wrap gap-1.5 mb-6">
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="px-2.5 py-1 text-xs font-mono rounded bg-white border border-[#d5cfef] text-[#1a153a] group-hover:border-[#d4c4fd] transition-colors"
+              className="px-2 py-0.5 text-xs font-mono rounded bg-zinc-50 border border-zinc-200/80 text-zinc-700"
             >
               {tech}
             </span>
@@ -90,18 +75,18 @@ export default function ProjectCard({
         </div>
       </div>
 
-      {/* Action Buttons: Live Demo & GitHub */}
-      <div className="pt-4 border-t border-[#e6e0fe] flex items-center justify-between gap-3 mt-auto">
-        <div className="flex flex-wrap items-center gap-2">
+      {/* Footer Links */}
+      <div className="pt-4 border-t border-zinc-100 flex items-center justify-between gap-3 mt-auto">
+        <div className="flex items-center gap-2">
           {project.url && (
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-purple px-4 py-2 text-xs font-semibold gap-1.5"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-zinc-900 text-white hover:bg-zinc-800 transition-colors"
             >
               <span>Live Demo</span>
-              <ExternalLink className="w-3.5 h-3.5 stroke-[2.5]" />
+              <ExternalLink className="w-3 h-3" />
             </a>
           )}
 
@@ -110,16 +95,16 @@ export default function ProjectCard({
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary-fly px-3.5 py-2 text-xs font-mono font-semibold gap-1.5"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-zinc-100 text-zinc-800 hover:bg-zinc-200 transition-colors"
             >
-              <FaGithub className="w-3.5 h-3.5 text-[#7c3aed]" />
-              <span>Source Code</span>
+              <FaGithub className="w-3.5 h-3.5" />
+              <span>Source</span>
             </a>
           )}
         </div>
 
-        <span className="font-mono text-[11px] text-[#686082]">
-          {project.url ? 'Deployed' : 'Open Source'}
+        <span className="text-[11px] font-mono text-zinc-400">
+          {project.url ? 'Deployed' : 'Repository'}
         </span>
       </div>
     </article>

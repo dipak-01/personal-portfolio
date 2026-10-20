@@ -2,50 +2,9 @@
 @source "./**/*.{ts,tsx}";
 @source "../components/**/*.{ts,tsx}";
 
-
 :root {
-  /* Surfaces & Backgrounds */
-  --color-surface-hero: #f4f6eb; /* Signature Warm Olive-Cream Hero Canvas */
-  --color-surface-card: #f4f3fb; /* Ethereal Lavender Card Background */
-  --color-surface-card-subtle: #f8f7fc; /* Subtle Light Violet Surface */
-  --color-surface-white: #ffffff; /* Pure White Elevated Panels */
-  --color-surface-footer: #110e23; /* Deep Midnight Navy Grounding Canvas */
-  --color-surface-footer-end: #0b0917; /* Linear Gradient Deep End */
-
-  /* Text & Foreground */
-  --color-text-primary: #2e2e2e; /* Soft Charcoal for High-Readability Body */
-  --color-text-heading: #000000; /* Pure Black for Bold Impactful Headings */
-  --color-text-editorial: #1a153a; /* Deep Midnight Navy for Editorial Headers */
-  --color-text-muted: #686082; /* Slate Purple for Subtitles & Meta Details */
-  --color-text-footer: #a29cb8; /* Light Lavender-Muted for Footer Links */
-  --color-text-white: #ffffff; /* Pure White on Dark Surfaces */
-
-  /* Brand Primary & Accents */
-  --color-accent-violet: #7c3aed; /* Electric Violet - Primary Action & Focus Ring */
-  --color-accent-violet-hover: #6d28d9; /* Violet Hover State */
-  --color-accent-violet-active: #5b21b6; /* Violet Active State */
-  --color-accent-soft-bg: #e6e0fe; /* Soft Violet Button & Pill Background */
-  --color-accent-soft-border: #d4c4fd; /* Soft Violet Button Border */
-
-  /* Secondary Semantic Accents */
-  --color-accent-blue: #4a90f1; /* Azure Blue for Category/Tab B */
-  --color-accent-teal: #55c5cf; /* Cyan Teal for Category/Tab C */
-  --color-accent-emerald: #10b981; /* Emerald Green for Success & Copied State */
-
-  /* Borders & Dividers */
-  --color-border-card: #d5cfef; /* Crisp 1px Card Border */
-  --color-border-subtle: #e6e0fe; /* Subtle Section & Header Dividers */
-  --color-border-table: #e2dfec; /* Table Bottom Rules */
-
-  /* Fonts */
-  --font-grotesque: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-serif: 'Newsreader', 'Mackinac', ui-serif, Georgia, serif;
-  --font-mono: 'JetBrains Mono', 'Fragment Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-
-  /* Easing */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 * {
@@ -54,206 +13,31 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background-color: var(--color-surface-white);
-  color: var(--color-text-primary);
-  font-family: var(--font-body);
-  min-height: 100vh;
-  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background-color: #fafafa;
+  color: #18181b;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography Utility Classes */
-.font-grotesque {
-  font-family: var(--font-grotesque);
+/* Custom scrollbar for subtle aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
-
-.font-serif {
-  font-family: var(--font-serif);
+::-webkit-scrollbar-track {
+  background: transparent;
 }
-
-.font-mono {
-  font-family: var(--font-mono);
-}
-
-h1, h2, h3, h4, .font-heading {
-  font-family: var(--font-grotesque);
-  letter-spacing: -0.02em;
-}
-
-::selection {
-  background-color: var(--color-accent-soft-bg);
-  color: var(--color-accent-violet-active);
-}
-
-/* Surfaces */
-.bg-surface-hero {
-  background-color: var(--color-surface-hero);
-}
-
-.bg-surface-card {
-  background-color: var(--color-surface-card);
-}
-
-.bg-surface-card-subtle {
-  background-color: var(--color-surface-card-subtle);
-}
-
-.bg-surface-footer {
-  background-color: var(--color-surface-footer);
-}
-
-/* Textures & Patterns */
-.luminescence-dots {
-  background-image: radial-gradient(circle, #ffffff 1.4px, transparent 1.5px);
-  background-size: 8px 8px;
-}
-
-.luminescence-dots-dark {
-  background-image: radial-gradient(circle, rgba(104, 96, 130, 0.22) 1.2px, transparent 1.3px);
-  background-size: 8px 8px;
-}
-
-.luminescence-ambient-glow {
-  background: linear-gradient(to right, #7dd3fc, #a5b4fc, #f472b6);
-  filter: blur(48px);
-  opacity: 0.5;
-  transform: rotate(3deg);
-}
-
-/* Buttons */
-.btn-purple {
-  background-color: var(--color-accent-violet);
-  color: #ffffff;
-  border-radius: 8px;
-  font-weight: 600;
-  box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.35);
-  transition: all 200ms var(--ease-out-expo);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-purple:hover {
-  background-color: var(--color-accent-violet-hover);
-  box-shadow: 0 6px 20px 0 rgba(124, 58, 237, 0.45);
-  transform: translateY(-1px);
-}
-
-.btn-purple:active {
-  background-color: var(--color-accent-violet-active);
-  transform: translateY(0);
-}
-
-.btn-purple:focus-visible {
-  outline: 2px solid var(--color-accent-violet);
-  outline-offset: 2px;
-}
-
-.btn-secondary-fly {
-  background-color: var(--color-accent-soft-bg);
-  border: 1px solid var(--color-accent-soft-border);
-  color: var(--color-accent-violet);
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 200ms var(--ease-out-expo);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-secondary-fly:hover {
-  background-color: var(--color-accent-soft-border);
-  transform: translateY(-1px);
-}
-
-.btn-secondary-fly:active {
-  background-color: #c4b5fd;
-  transform: translateY(0);
-}
-
-.btn-secondary-fly:focus-visible {
-  outline: 2px solid var(--color-accent-violet);
-  outline-offset: 2px;
-}
-
-/* Glass Pill Button */
-.btn-pill-glass {
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #ffffff;
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
   border-radius: 9999px;
-  transition: all 200ms ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
-
-.btn-pill-glass:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-}
-
-/* Circular Stepper Button */
-.btn-stepper {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 9999px;
-  background-color: var(--color-accent-violet);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 200ms var(--ease-out-expo);
-  box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.3);
-}
-
-.btn-stepper:hover {
-  background-color: var(--color-accent-violet-hover);
-  transform: scale(1.05);
-}
-
-.btn-stepper:active {
-  background-color: var(--color-accent-violet-active);
-  transform: scale(0.95);
-}
-
-/* Hide scrollbars for horizontal snap rails */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Rotating Ambient Glow */
-@keyframes ambient-glow {
-  0% { transform: rotate(3deg) scale(1); opacity: 0.5; }
-  50% { transform: rotate(6deg) scale(1.08); opacity: 0.65; }
-  100% { transform: rotate(3deg) scale(1); opacity: 0.5; }
-}
-
-.animate-ambient-glow {
-  animation: ambient-glow 10s ease-in-out infinite;
-}
-
-/* Infinite Marquee */
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 28s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
 }
 
 /* Reduced Motion */

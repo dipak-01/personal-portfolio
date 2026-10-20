@@ -1,140 +1,127 @@
 'use client';
 
 import React from 'react';
-import { Download, CheckCircle } from 'lucide-react';
+import { Calendar, Download } from 'lucide-react';
+
+interface Experience {
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  type: string;
+  points: string[];
+  skills: string[];
+}
 
 export default function ExperienceSection() {
-  const experiences = [
+  const experiences: Experience[] = [
     {
+      company: 'GPT Innovations',
+      role: 'Software Developer Intern',
       period: 'Sep 2024 – Feb 2025',
-      role: 'Software Developer (Internship)',
-      organization: 'GPT Innovations',
-      type: 'Remote',
-      description:
-        'Engineered interactive frontend dashboards and implemented AI voice agents for medical workflows.',
-      achievements: [
-        'Developed an interactive frontend dashboard to visualize and manage patient files and extracted medical data, enabling seamless access to critical insights and improving overall operational workflow efficiency by 60%.',
-        'Implemented AI-powered voice agents for medical billing pre-authorization, streamlining complex manual workflows using Twilio and OpenAI voice agents, significantly reducing human errors and callbacks.',
-        'Optimized responsive and high-performing UIs using React.js and Tailwind CSS by profiling, caching, and refactoring components, resulting in improved user engagement and page load under 300ms.',
+      location: 'Remote',
+      type: 'Internship',
+      points: [
+        'Developed an interactive frontend dashboard to visualize and manage patient files and extracted medical data, improving operational workflow efficiency by 60%.',
+        'Implemented AI-powered voice agents for medical billing pre-authorization using Twilio and OpenAI, streamlining complex manual workflows and reducing callback rates.',
+        'Optimized UI performance in React.js and Tailwind CSS through component refactoring and client caching, cutting page load times to under 300ms.',
       ],
-      skills: ['React.js', 'Tailwind CSS', 'OpenAI', 'Twilio', 'REST APIs'],
+      skills: ['React.js', 'Tailwind CSS', 'OpenAI', 'Twilio', 'REST APIs', 'TypeScript'],
     },
     {
+      company: 'Luco Homes',
+      role: 'Software Developer Intern',
       period: 'Feb 2024 – Mar 2024',
-      role: 'Software Developer (Internship)',
-      organization: 'Luco Homes',
-      type: 'Remote',
-      description:
-        'Designed and developed a mobile-first, responsive web platform with content management for a pre-engineered homes startup.',
-      achievements: [
-        'Designed a mobile-first, responsive website using modern frontend technologies, improving product visibility and driving higher customer engagement through intuitive design.',
-        'Integrated video-based testimonials and interactive FAQs with seamless, mobile-friendly playback and smooth content management, improving browsing experiences by 35%.',
-        'Developed an intuitive, admin-friendly content management interface for FAQs and testimonials, enabling quick updates without technical help and significantly reducing maintenance time.',
+      location: 'Remote',
+      type: 'Internship',
+      points: [
+        'Designed and developed a mobile-first, responsive web platform for a pre-engineered homes startup, improving customer engagement and product discoverability.',
+        'Integrated video-based customer testimonials and interactive FAQs with seamless playback, increasing browsing engagement by 35%.',
+        'Built an intuitive, admin-friendly content management interface for non-technical team members, substantially reducing content update times.',
       ],
       skills: ['React.js', 'JavaScript', 'Tailwind CSS', 'Responsive UI', 'CMS'],
-    },
-    {
-      period: 'Nov 2022 – May 2027',
-      role: 'Integrated B.Tech and M.Tech in Information Technology',
-      organization: 'Indian Institute of Information Technology and Management, Gwalior',
-      type: 'Degree Program',
-      description:
-        'Comprehensive academic curriculum covering Data Structures, Algorithms, Computer Networks, Operating Systems, Database Management Systems, System Design, and Cloud Computing.',
-      achievements: [
-        'Hands-on technical curriculum in Information Technology, Software Engineering, and Distributed Systems.',
-        'Actively building production-level full-stack and cloud DevOps systems alongside coursework.',
-      ],
-      skills: ['C/C++', 'Python', 'JavaScript', 'SQL', 'Data Structures', 'System Design'],
     },
   ];
 
   return (
-    <section id="experience" className="space-y-12">
-      
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#e6e0fe] pb-6">
-        <div className="space-y-2">
-          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#7c3aed] bg-[#ede9fe] px-3.5 py-1 rounded-full border border-[#d5cfef] inline-block">
-            Experience &bull; Resume
-          </span>
-          <h2 className="font-grotesque font-extrabold text-3xl sm:text-4xl text-[#000000] tracking-tight">
-            Work Experience &amp; Education
-          </h2>
-          <p className="font-serif italic text-[#686082] text-base max-w-xl">
-            Software development internships and technical degree program directly from my resume.
-          </p>
+    <section id="experience" className="py-12 sm:py-16 border-b border-zinc-200/80">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-8">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-zinc-100 pb-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">
+              Work Experience
+            </h2>
+            <p className="text-sm text-zinc-500 mt-1">
+              Software engineering internships and industry experience
+            </p>
+          </div>
+          <a
+            href="/Resume.pdf"
+            download="Dipak_Kurkute_Resume.pdf"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 hover:text-zinc-900 transition-colors"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>Full Resume (PDF)</span>
+          </a>
         </div>
 
-        {/* Download Resume Button */}
-        <a
-          href="/Resume.pdf"
-          download="Dipak_Kurkute_Resume.pdf"
-          className="btn-purple px-5 py-3 text-sm font-semibold shrink-0 gap-2"
-        >
-          <Download className="w-4 h-4 stroke-[2.5]" />
-          <span>Download Resume (PDF)</span>
-        </a>
-      </div>
+        {/* Experience List */}
+        <div className="space-y-8">
+          {experiences.map((exp) => (
+            <div
+              key={exp.company}
+              className="bg-white border border-zinc-200/80 rounded-xl p-6 sm:p-7 shadow-xs hover:border-zinc-300 transition-colors"
+            >
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 border-b border-zinc-100 pb-4 mb-4">
+                <div>
+                  <h3 className="text-lg font-bold text-zinc-900">
+                    {exp.role}
+                  </h3>
+                  <div className="text-sm font-medium text-zinc-700 flex items-center gap-2 mt-0.5">
+                    <span className="text-zinc-900 font-semibold">{exp.company}</span>
+                    <span className="text-zinc-300">&bull;</span>
+                    <span className="text-zinc-500">{exp.location}</span>
+                    <span className="text-zinc-300">&bull;</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 font-mono">
+                      {exp.type}
+                    </span>
+                  </div>
+                </div>
 
-      {/* Experience Timeline Cards */}
-      <div className="space-y-6">
-        {experiences.map((item, idx) => (
-          <div
-            key={idx}
-            className="bg-white border border-[#d5cfef] rounded-[16px] p-7 sm:p-9 shadow-xs hover:border-[#7c3aed] transition-colors"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#e6e0fe] pb-4 mb-5">
-              <div>
-                <span className="font-mono text-xs font-semibold text-[#7c3aed] bg-[#ede9fe] px-2.5 py-1 rounded inline-block mb-1">
-                  {item.period}
-                </span>
-                <h3 className="font-grotesque font-bold text-xl sm:text-2xl text-[#1a153a]">
-                  {item.role}
-                </h3>
-                <div className="text-sm text-[#4a4568] font-medium pt-0.5">
-                  <span className="font-bold text-[#1a153a]">{item.organization}</span>
-                  {item.type && (
-                    <span className="text-[#686082]"> &bull; {item.type}</span>
-                  )}
+                <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500 shrink-0">
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>{exp.period}</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 font-mono text-xs text-[#10b981] font-bold">
-                <span className="w-2 h-2 rounded-full bg-[#10b981]" />
-                <span>Verified</span>
+              {/* Bullet Points */}
+              <ul className="space-y-2 mb-5">
+                {exp.points.map((point, pIdx) => (
+                  <li key={pIdx} className="flex items-start gap-2.5 text-sm text-zinc-600 leading-relaxed">
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 mt-2 shrink-0" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Skills Tags */}
+              <div className="flex flex-wrap items-center gap-1.5 pt-3 border-t border-zinc-100">
+                <span className="text-xs text-zinc-400 font-mono mr-1.5">Tech:</span>
+                {exp.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-2 py-0.5 text-xs font-mono rounded bg-zinc-100 text-zinc-700 border border-zinc-200/60"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
-
-            <p className="text-[#4a4568] text-sm sm:text-base leading-relaxed mb-5">
-              {item.description}
-            </p>
-
-            {/* Achievements Bullet List */}
-            <div className="space-y-2.5 mb-6">
-              {item.achievements.map((ach, aIdx) => (
-                <div key={aIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2e2e2e]">
-                  <CheckCircle className="w-4 h-4 text-[#7c3aed] shrink-0 mt-0.5" />
-                  <span className="leading-relaxed">{ach}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Skills tags */}
-            <div className="pt-4 border-t border-[#e6e0fe] flex flex-wrap items-center gap-2">
-              <span className="text-xs font-mono text-[#686082] mr-2">Technologies:</span>
-              {item.skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-2.5 py-1 text-xs font-mono rounded bg-[#f4f3fb] border border-[#d5cfef] text-[#1a153a]"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
     </section>
   );
 }

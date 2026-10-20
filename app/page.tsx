@@ -1,13 +1,12 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
-import ProjectsSection from '../components/ProjectsSection';
-import InfiniteSkills from '../components/InfiniteSkills';
 import ExperienceSection from '../components/ExperienceSection';
+import ProjectsSection from '../components/ProjectsSection';
+import SkillsSection from '../components/SkillsSection';
+import AboutSection from '../components/AboutSection';
 import ContactCtaSection from '../components/ContactCtaSection';
 import Footer from '../components/Footer';
-import CornerCross from '../components/CornerCross';
 import { Project } from '../components/ProjectCard';
 
 export default function Home() {
@@ -27,10 +26,10 @@ export default function Home() {
         'Linux',
       ],
       featured: true,
-      badge: 'Self-Hosted Cloud',
+      badge: 'Cloud & DevOps',
       highlights: [
-        'Modular Helm charts for stateful workloads (Paperless-ngx, Memos, Immich, Homepage, Uptime Kuma) with PVC storage and Traefik ingress.',
-        'Private mesh network security over Tailscale overlay with clean subdomain routing under *.dipakkurkute.dev.',
+        'Modular Helm charts for stateful workloads (Paperless-ngx, Immich, Uptime Kuma) with PVC storage and Traefik ingress.',
+        'Private mesh network security over Tailscale overlay with clean subdomain routing.',
         'Automated node configuration and container runtime setup using Ansible infrastructure-as-code playbooks.',
       ],
     },
@@ -73,11 +72,11 @@ export default function Home() {
         'Ansible',
       ],
       featured: true,
-      badge: 'Cloud & GitOps SRE',
+      badge: 'GitOps & SRE',
       highlights: [
         'Provisioned reproducible AWS infrastructure using Terraform and automated Linux host configurations with Ansible.',
         'Deployed containerized microservices on Kubernetes using Helm with automated ArgoCD GitOps workflows for declarative rollouts and rollbacks.',
-        'Cluster-wide Prometheus & Grafana monitoring with custom SLIs/SLOs and automated alerting for maximum reliability.',
+        'Cluster-wide Prometheus & Grafana monitoring with custom SLIs/SLOs and automated alerting.',
       ],
     },
     {
@@ -115,9 +114,8 @@ export default function Home() {
       technologies: ['React.js', 'Tailwind CSS', 'Node.js', 'Socket.IO', 'MongoDB', 'Redux'],
       badge: 'Streaming & Community',
       highlights: [
-        'Anime streaming platform with 1,500+ titles, advanced search, community posts, real-time chat, and upcoming episode timetables.',
+        'Anime streaming platform with 1,500+ titles, advanced search, community posts, and real-time chat.',
         'Responsive user-focused interface using React.js and Tailwind CSS with personalized watchlists, favorites, and trending sections.',
-        'Integrated anime schedules and community interactions boosting engagement by 35% across devices.',
       ],
     },
     {
@@ -136,73 +134,31 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-white">
-      {/* Sticky Autohiding Navbar */}
+    <div className="min-h-screen bg-[#fafafa] text-zinc-900">
+      {/* Sticky Clean Header */}
       <Navbar />
 
-      {/* Surface 1: Signature Warm Olive-Cream Hero (#f4f6eb) */}
-      <HeroSection />
+      <main>
+        {/* Hero Section */}
+        <HeroSection />
 
-      {/* Surface 2: About Me & My Approach (#ffffff) */}
-      <section className="bg-white border-b border-[#e6e0fe] relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-x border-[#e6e0fe] relative">
-          <CornerCross position="top-left" />
-          <CornerCross position="top-right" />
-          <AboutSection />
-        </div>
-      </section>
+        {/* Experience Section */}
+        <ExperienceSection />
 
-      {/* Surface 3: Featured Projects (#f8f7fc) */}
-      <section className="bg-[#f8f7fc] border-b border-[#e6e0fe] relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-x border-[#e6e0fe] relative">
-          <CornerCross position="top-left" />
-          <CornerCross position="top-right" />
-          <ProjectsSection projects={projects} />
-        </div>
-      </section>
+        {/* Projects Section */}
+        <ProjectsSection projects={projects} />
 
-      {/* Surface 4: Skills & Toolkit (#ffffff) */}
-      <section id="skills" className="bg-white border-b border-[#e6e0fe] relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-x border-[#e6e0fe] relative space-y-8">
-          <CornerCross position="top-left" />
-          <CornerCross position="top-right" />
-          <div className="text-left space-y-3">
-            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#7c3aed] bg-[#ede9fe] px-3.5 py-1 rounded-full border border-[#d5cfef] inline-block">
-              Skills &bull; Technologies
-            </span>
-            <h2 className="font-grotesque font-extrabold text-3xl sm:text-4xl text-[#000000] tracking-tight">
-              Tools &amp; Frameworks I Work With
-            </h2>
-            <p className="font-serif italic text-base sm:text-lg text-[#686082] max-w-xl">
-              Modern frontend libraries, backend databases, and DevOps automation tooling.
-            </p>
-          </div>
+        {/* Skills Section */}
+        <SkillsSection />
 
-          <InfiniteSkills />
-        </div>
-      </section>
+        {/* About & Education Section */}
+        <AboutSection />
 
-      {/* Surface 5: Experience & Education (#faf9fe) */}
-      <section className="bg-[#faf9fe] border-b border-[#e6e0fe] relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-x border-[#e6e0fe] relative">
-          <CornerCross position="top-left" />
-          <CornerCross position="top-right" />
-          <ExperienceSection />
-        </div>
-      </section>
+        {/* Contact CTA Section */}
+        <ContactCtaSection />
+      </main>
 
-      {/* Surface 6: Contact & Opportunities (#ffffff) */}
-      <section className="bg-white border-b border-[#e6e0fe] relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-x border-[#e6e0fe] relative">
-          <CornerCross position="top-left" />
-          <CornerCross position="top-right" />
-          <CornerCross position="bottom-left" />
-          <CornerCross position="bottom-right" />
-          <ContactCtaSection />
-        </div>
-      </section>
-
-      {/* Surface 7: Deep Midnight Anchor Footer (#110e23) */}
+      {/* Minimal Footer */}
       <Footer />
     </div>
   );
